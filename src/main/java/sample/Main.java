@@ -15,20 +15,21 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        PcapNetworkInterface nif = Pcaps.getDevByName("wlan0");
+        PcapNetworkInterface nif = Pcaps.getDevByName("wlan0mon");
         int snapLen = 65536;
         int timeout = 10;
         PcapHandle handle = nif.openLive(snapLen, PcapNetworkInterface.PromiscuousMode.PROMISCUOUS, timeout);
         BpfProgram bpfProgram = handle.compileFilter("wlan type mgt subtype beacon", BpfProgram.BpfCompileMode.NONOPTIMIZE, PcapHandle.PCAP_NETMASK_UNKNOWN);
         handle.setFilter(bpfProgram);
-        handle.loop(0, (Packet packet) -> {
-            System.out.println("header len: " + packet.getHeader().length() + "; payload len:" + packet.getPayload().length());
-        });
 
         Parent root = FXMLLoader.load(getClass().getResource("/sample.fxml"));
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(root, 300, 275));
         primaryStage.show();
+
+        // handle.loop(0, (Packet packet) -> {
+        //     System.out.println("header len: " + packet.getHeader().length() + "; payload len:" + packet.getPayload().length());
+        // });
     }
 
 
