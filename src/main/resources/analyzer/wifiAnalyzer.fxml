@@ -1,0 +1,26 @@
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
+<GridPane fx:controller="analyzer.controller.Controller"
+          xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
+
+    <Text text="Welcome" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+
+    <TableView fx:id="tableView" GridPane.columnIndex="0" GridPane.rowIndex="1">
+        <columns>
+            <TableColumn text="SSID">
+                <cellValueFactory>
+                    <PropertyValueFactory property="SSID"/>
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn text="MAC">
+                <cellValueFactory>
+                    <PropertyValueFactory property="MAC"/>
+                </cellValueFactory>
+            </TableColumn>
+        </columns>
+    </TableView>
+
+</GridPane>
