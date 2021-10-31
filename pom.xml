@@ -15,13 +15,13 @@
                 <configuration>
                     <source>8</source>
                     <target>8</target>
-                    <annotationProcessorPaths>
-      <path>
-        <groupId>org.projectlombok</groupId>     
-        <artifactId>lombok</artifactId>
-        <version>${lombok.version}</version>
-      </path>
-    </annotationProcessorPaths>
+<!--                    <annotationProcessorPaths>-->
+<!--                        <path>-->
+<!--                            <groupId>org.projectlombok</groupId>-->
+<!--                            <artifactId>lombok</artifactId>-->
+<!--                            <version>1.18.22</version>-->
+<!--                        </path>-->
+<!--                    </annotationProcessorPaths>-->
                 </configuration>
             </plugin>
             <plugin>

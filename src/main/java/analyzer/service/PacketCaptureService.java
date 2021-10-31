@@ -1,16 +1,19 @@
 package analyzer.service;
 
 import analyzer.model.WirelessNetworkInfo;
+import analyzer.observer.Observable;
+import analyzer.observer.Observer;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.pcap4j.core.*;
-import org.pcap4j.packet.Packet;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
-public class PacketCaptureService {
+public class PacketCaptureService implements Observable {
 
     private static final String WLAN0MON = "wlan0mon";
     private static final String BFP_EXPRESSION = "wlan type mgt subtype beacon";
@@ -19,21 +22,34 @@ public class PacketCaptureService {
     private static final int TIMEOUT = 10;
 
     @Getter
-    private final List<WirelessNetworkInfo> networks = new ArrayList<>();
+    private final List<Observer> observers = new ArrayList<>();
+
+    @Getter
+    private final Map<String, WirelessNetworkInfo> networks = new HashMap<>();
 
     public void capture() {
-        PcapHandle handle = initHandle();
-        try {
-            handle.loop(0, (Packet packet) -> {
-                System.out.println("header len: " + packet.getHeader().length() + "; payload len:" + packet.getPayload().length());
-                networks.add(new WirelessNetworkInfo(Integer.toString(packet.getHeader().length()), Integer.toString(packet.getPayload().length())));
-            });
-        } catch (PcapNativeException | InterruptedException | NotOpenException e) {
-            log.error("Error on capture()", e);
-        }
+//        PcapHandle handle = initHandle();
+//        try {
+//            handle.loop(0, (Packet packet) -> {
+//                System.out.println("header len: " + packet.getHeader().length() + "; payload len:" + packet.getPayload().length());
+//                networks.put(Integer.toString(packet.getHeader().length()), new WirelessNetworkInfo(Integer.toString(packet.getHeader().length()), Integer.toString(packet.getPayload().length())));
+//                observers.forEach(Observer::updateView);
+//            });
+//        } catch (PcapNativeException | InterruptedException | NotOpenException e) {
+//            log.error("Error on capture()", e);
+//        }
 
         //for testing UI on windows
-//        networks.add(new WirelessNetworkInfo());
+        int i = 0;
+        while (i++ < 10) {
+            networks.put(Integer.toString(i), new WirelessNetworkInfo());
+            observers.forEach(Observer::updateView);
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     private PcapHandle initHandle() {
@@ -48,5 +64,10 @@ public class PacketCaptureService {
         }
 
         return handle;
+    }
+
+    @Override
+    public void registerObserver(Observer observer) {
+        this.observers.add(observer);
     }
 }
