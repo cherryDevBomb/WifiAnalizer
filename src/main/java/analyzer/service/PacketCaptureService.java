@@ -6,6 +6,7 @@ import analyzer.observer.Observer;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.pcap4j.core.*;
+import org.pcap4j.packet.Packet;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,31 +28,6 @@ public class PacketCaptureService implements Observable {
     @Getter
     private final Map<String, WirelessNetworkInfo> networks = new HashMap<>();
 
-    public void capture() {
-//        PcapHandle handle = initHandle();
-//        try {
-//            handle.loop(0, (Packet packet) -> {
-//                System.out.println("header len: " + packet.getHeader().length() + "; payload len:" + packet.getPayload().length());
-//                networks.put(Integer.toString(packet.getHeader().length()), new WirelessNetworkInfo(Integer.toString(packet.getHeader().length()), Integer.toString(packet.getPayload().length())));
-//                observers.forEach(Observer::updateView);
-//            });
-//        } catch (PcapNativeException | InterruptedException | NotOpenException e) {
-//            log.error("Error on capture()", e);
-//        }
-
-        //for testing UI on windows
-        int i = 0;
-        while (i++ < 10) {
-            networks.put(Integer.toString(i), new WirelessNetworkInfo());
-            observers.forEach(Observer::updateView);
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
     private PcapHandle initHandle() {
         PcapHandle handle = null;
         try {
@@ -66,8 +42,30 @@ public class PacketCaptureService implements Observable {
         return handle;
     }
 
-    @Override
-    public void registerObserver(Observer observer) {
-        this.observers.add(observer);
+    public void capture() {
+        PcapHandle handle = initHandle();
+        try {
+            handle.loop(0, (Packet packet) -> {
+                WirelessNetworkInfo wirelessNetworkInfo = FrameParser.parseFrame(packet.getPayload().getRawData()); //or packet.getRawData()?
+                if (wirelessNetworkInfo != null) {
+                    networks.put(Integer.toString(packet.getHeader().length()), new WirelessNetworkInfo(Integer.toString(packet.getHeader().length()), wirelessNetworkInfo.getMAC()));
+                    observers.forEach(Observer::updateView);
+                }
+            });
+        } catch (PcapNativeException | InterruptedException | NotOpenException e) {
+            log.error("Error on capture()", e);
+        }
+
+        //for testing UI on windows
+//        int i = 0;
+//        while (i++ < 10) {
+//            networks.put(Integer.toString(i), new WirelessNetworkInfo());
+//            observers.forEach(Observer::updateView);
+//            try {
+//                Thread.sleep(1000);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//        }
     }
 }
