@@ -16,7 +16,7 @@ public class Controller {
     private final PacketCaptureService pCapService = new PacketCaptureService();
 
     @FXML private void initialize() {
-        Platform.runLater(() -> tableView.setItems(FXCollections.observableArrayList​(pCapService.getNetworks().values())));
+        Platform.runLater(() -> tableView.setItems(FXCollections.observableArrayList(pCapService.getNetworks().values())));
         Executors.newSingleThreadExecutor().execute(pCapService::capture);
     }
 

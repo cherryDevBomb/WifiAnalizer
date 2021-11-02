@@ -46,6 +46,9 @@ public class PacketCaptureService implements Observable {
         PcapHandle handle = initHandle();
         try {
             handle.loop(0, (Packet packet) -> {
+                System.out.println("getRawData() len: " + packet.getRawData().length);
+                System.out.println("getHeader().getRawData() len: " + packet.getHeader().getRawData().length);
+                System.out.println("getPayload().getRawData() len: " + packet.getPayload().getRawData().length);
                 WirelessNetworkInfo wirelessNetworkInfo = FrameParser.parseFrame(packet.getPayload().getRawData()); //or packet.getRawData()?
                 if (wirelessNetworkInfo != null) {
                     networks.put(Integer.toString(packet.getHeader().length()), new WirelessNetworkInfo(Integer.toString(packet.getHeader().length()), wirelessNetworkInfo.getMAC()));
