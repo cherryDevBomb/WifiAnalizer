@@ -3,6 +3,7 @@ package analyzer.service;
 import analyzer.model.WirelessNetworkInfo;
 import analyzer.observer.Observable;
 import analyzer.observer.Observer;
+import analyzer.util.ByteUtils;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.pcap4j.core.*;
@@ -46,9 +47,9 @@ public class PacketCaptureService implements Observable {
         PcapHandle handle = initHandle();
         try {
             handle.loop(0, (Packet packet) -> {
-                System.out.println("getRawData() len: " + packet.getRawData().length);
-                System.out.println("getHeader().getRawData() len: " + packet.getHeader().getRawData().length);
-                System.out.println("getPayload().getRawData() len: " + packet.getPayload().getRawData().length);
+                System.out.println("getRawData() len: " + packet.getRawData().length + " -----" + ByteUtils.byteArrayToHexString(packet.getRawData()));
+                System.out.println("getHeader().getRawData() len: " + packet.getHeader().getRawData().length + " -----" + ByteUtils.byteArrayToHexString(packet.getHeader().getRawData()));
+                System.out.println("getPayload().getRawData() len: " + packet.getPayload().getRawData().length + " -----" + ByteUtils.byteArrayToHexString(packet.getPayload().getRawData()));
                 WirelessNetworkInfo wirelessNetworkInfo = FrameParser.parseFrame(packet.getPayload().getRawData()); //or packet.getRawData()?
                 if (wirelessNetworkInfo != null) {
                     networks.put(Integer.toString(packet.getHeader().length()), new WirelessNetworkInfo(Integer.toString(packet.getHeader().length()), wirelessNetworkInfo.getMAC()));
