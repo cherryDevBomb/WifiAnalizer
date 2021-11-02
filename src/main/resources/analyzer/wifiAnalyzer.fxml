@@ -20,6 +20,11 @@
                     <PropertyValueFactory property="MAC"/>
                 </cellValueFactory>
             </TableColumn>
+            <TableColumn text="Channel">
+                <cellValueFactory>
+                    <PropertyValueFactory property="channel"/>
+                </cellValueFactory>
+            </TableColumn>
         </columns>
     </TableView>
 

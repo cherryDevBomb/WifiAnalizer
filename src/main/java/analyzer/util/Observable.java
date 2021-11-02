@@ -1,4 +1,4 @@
-package analyzer.observer;
+package analyzer.util;
 
 import java.util.List;
 

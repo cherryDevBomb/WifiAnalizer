@@ -6,16 +6,7 @@ public class WirelessNetworkInfo {
 
     private final SimpleStringProperty SSID = new SimpleStringProperty("");
     private final SimpleStringProperty MAC = new SimpleStringProperty("");
-
-    public WirelessNetworkInfo() {
-        setSSID("ssid");
-        setMAC("mac");
-    }
-
-    public WirelessNetworkInfo(String SSID, String MAC) {
-        setSSID(SSID);
-        setMAC(MAC);
-    }
+    private final SimpleStringProperty channel = new SimpleStringProperty("");
 
     public String getSSID() {
         return SSID.get();
@@ -39,5 +30,17 @@ public class WirelessNetworkInfo {
 
     public void setMAC(String MAC) {
         this.MAC.set(MAC);
+    }
+
+    public String getChannel() {
+        return channel.get();
+    }
+
+    public SimpleStringProperty channelProperty() {
+        return channel;
+    }
+
+    public void setChannel(String channel) {
+        this.channel.set(channel);
     }
 }

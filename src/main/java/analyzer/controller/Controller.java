@@ -1,7 +1,7 @@
 package analyzer.controller;
 
 import analyzer.model.WirelessNetworkInfo;
-import analyzer.service.PacketCaptureService;
+import analyzer.pcap.PacketCaptureService;
 import javafx.collections.FXCollections;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
