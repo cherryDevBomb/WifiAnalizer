@@ -47,12 +47,12 @@ public class PacketCaptureService implements Observable {
         PcapHandle handle = initHandle();
         try {
             handle.loop(0, (Packet packet) -> {
-                System.out.println("getRawData() len: " + packet.getRawData().length + " -----" + ByteUtils.byteArrayToHexString(packet.getRawData()));
-                System.out.println("getHeader().getRawData() len: " + packet.getHeader().getRawData().length + " -----" + ByteUtils.byteArrayToHexString(packet.getHeader().getRawData()));
-                System.out.println("getPayload().getRawData() len: " + packet.getPayload().getRawData().length + " -----" + ByteUtils.byteArrayToHexString(packet.getPayload().getRawData()));
-                WirelessNetworkInfo wirelessNetworkInfo = FrameParser.parseFrame(packet.getPayload().getRawData()); //or packet.getRawData()?
+                // System.out.println("getRawData() len: " + packet.getRawData().length + " -----" + ByteUtils.byteArrayToHexString(packet.getRawData()));
+                // System.out.println("getHeader().getRawData() len: " + packet.getHeader().getRawData().length + " -----" + ByteUtils.byteArrayToHexString(packet.getHeader().getRawData()));
+                // System.out.println("getPayload().getRawData() len: " + packet.getPayload().getRawData().length + " -----" + ByteUtils.byteArrayToHexString(packet.getPayload().getRawData()));
+                WirelessNetworkInfo wirelessNetworkInfo = FrameParser.parseFrame(packet.getPayload().getRawData());
                 if (wirelessNetworkInfo != null) {
-                    networks.put(Integer.toString(packet.getHeader().length()), new WirelessNetworkInfo(Integer.toString(packet.getHeader().length()), wirelessNetworkInfo.getMAC()));
+                    networks.put(wirelessNetworkInfo.getMAC(), new WirelessNetworkInfo(Integer.toString(packet.getHeader().length()), wirelessNetworkInfo.getMAC()));
                     observers.forEach(Observer::updateView);
                 }
             });

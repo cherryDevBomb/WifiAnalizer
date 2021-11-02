@@ -21,8 +21,8 @@ public class GenericManagementFrame {
 
     public static GenericManagementFrame parse(byte[] bytes) {
         return GenericManagementFrame.builder()
-                .frameControl(ManagementFrameSubtype.getType(ByteBuffer.wrap(Arrays.copyOfRange(bytes, 0, 2)).getInt()))
-                .duration(ByteBuffer.wrap(Arrays.copyOfRange(bytes, 2, 4)).getInt())
+                .frameControl(ManagementFrameSubtype.getType(ByteBuffer.wrap(Arrays.copyOfRange(bytes, 0, 2)).getShort()))
+                .duration(ByteBuffer.wrap(Arrays.copyOfRange(bytes, 2, 4)).getShort())
                 .da(Arrays.copyOfRange(bytes, 4, 10))
                 .sa(Arrays.copyOfRange(bytes, 10, 16))
                 .bssid(Arrays.copyOfRange(bytes, 16, 22))

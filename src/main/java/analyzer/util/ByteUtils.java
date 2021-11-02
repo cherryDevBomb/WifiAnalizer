@@ -10,8 +10,9 @@ public class ByteUtils {
     public static Stream<String> byteArrayToHexStringStream(byte[] bytes) {
         return Bytes.asList(bytes)
                 .stream()
-                .map(Byte::toUnsignedInt)
-                .map(Integer::toHexString);
+                // .map(Byte::toUnsignedInt)
+                // .map(Integer::toHexString)
+                .map(i -> String.format("%02x", i));
     }
 
     public static String byteArrayToHexString(byte[] bytes) {
