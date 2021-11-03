@@ -8,19 +8,19 @@
 
     <Text text="Welcome" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
 
-    <TableView fx:id="tableView" GridPane.columnIndex="0" GridPane.rowIndex="1" columnResizePolicy="UNCONSTRAINED_RESIZE_POLICY">
+    <TableView fx:id="tableView" GridPane.columnIndex="0" GridPane.rowIndex="1">
         <columns>
-            <TableColumn text="SSID" prefWidth="100">
+            <TableColumn text="SSID" prefWidth="120">
                 <cellValueFactory>
                     <PropertyValueFactory property="SSID"/>
                 </cellValueFactory>
             </TableColumn>
-            <TableColumn text="MAC" prefWidth="100">
+            <TableColumn text="MAC" prefWidth="150">
                 <cellValueFactory>
                     <PropertyValueFactory property="MAC"/>
                 </cellValueFactory>
             </TableColumn>
-            <TableColumn text="Channel" prefWidth="50">
+            <TableColumn text="Channel" prefWidth="80">
                 <cellValueFactory>
                     <PropertyValueFactory property="channel"/>
                 </cellValueFactory>
