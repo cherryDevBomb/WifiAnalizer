@@ -22,12 +22,12 @@ public class Controller implements Observer {
 
     @FXML private void initialize() {
         pCapService.registerObserver(this);
-        Platform.runLater(() -> tableView.setItems(FXCollections.observableArrayList​(pCapService.getNetworks().values())));
+        Platform.runLater(() -> tableView.setItems(FXCollections.observableArrayList(pCapService.getNetworks().values())));
         Executors.newSingleThreadExecutor().execute(pCapService::capture);
     }
 
     @Override
     public void updateView() {
-        tableView.setItems(FXCollections.observableArrayList​(pCapService.getNetworks().values()));
+        tableView.setItems(FXCollections.observableArrayList(pCapService.getNetworks().values()));
     }
 }
