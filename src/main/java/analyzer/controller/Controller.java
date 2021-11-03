@@ -1,22 +1,18 @@
 package analyzer.controller;
 
+import java.util.concurrent.Executors;
+
 import analyzer.model.WirelessNetworkInfo;
-import analyzer.util.Observer;
 import analyzer.pcap.PacketCaptureService;
-import javafx.collections.FXCollections;
+import analyzer.util.Observer;
 import javafx.application.Platform;
-import javafx.collections.ObservableList;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableView;
-
-import java.util.ArrayList;
-import java.util.concurrent.Executors;
 
 public class Controller implements Observer {
 
     @FXML private TableView<WirelessNetworkInfo> tableView;
-
-    private ObservableList<WirelessNetworkInfo> observableList;
 
     private final PacketCaptureService pCapService = new PacketCaptureService();
 
