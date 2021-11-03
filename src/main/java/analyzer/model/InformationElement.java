@@ -11,17 +11,17 @@ import lombok.Data;
 @Builder
 public class InformationElement {
 
-    private byte elementId;
-    private byte length;
+    private int elementId;
+    private int length;
     private byte[] body;
 
     public static List<InformationElement> parseList(byte[] bytes) {
         List<InformationElement> parsedElements = new ArrayList<>();
 
-        int offset = 0;
+        int offset = 12;
         while (offset < bytes.length) {
-            byte id = bytes[offset++];
-            byte len = bytes[offset++];
+            int id = Byte.toUnsignedInt(bytes[offset++]);
+            int len = Byte.toUnsignedInt(bytes[offset++]);
             byte[] infoBody = Arrays.copyOfRange(bytes, offset, offset + len);
 
             offset += len;
