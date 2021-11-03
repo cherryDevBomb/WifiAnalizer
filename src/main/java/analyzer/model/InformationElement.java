@@ -18,7 +18,7 @@ public class InformationElement {
     public static List<InformationElement> parseList(byte[] bytes) {
         List<InformationElement> parsedElements = new ArrayList<>();
 
-        int offset = 12;
+        int offset = 0;
         while (offset < bytes.length) {
             int id = Byte.toUnsignedInt(bytes[offset++]);
             int len = Byte.toUnsignedInt(bytes[offset++]);

@@ -16,7 +16,7 @@ public class FrameParser {
         GenericManagementFrame genericManagementFrame = GenericManagementFrame.parse(frame);
 
         // extract SSID from information element
-        Optional<InformationElement> ssidElement = genericManagementFrame.getInformationElementById(InformationElementID.SERVICE_SET_IDENTITY);
+        Optional<InformationElement> ssidElement = genericManagementFrame.getFrameBody().getInformationElementById(InformationElementID.SERVICE_SET_IDENTITY);
         if (ssidElement.isPresent()) {
             String ssid = new String(ssidElement.get().getBody());
             wirelessNetworkInfo.setSSID(ssid);
@@ -27,7 +27,7 @@ public class FrameParser {
         wirelessNetworkInfo.setMAC(macAddress);
 
         // extract Channel from information element
-        Optional<InformationElement> dsParameterSetElement = genericManagementFrame.getInformationElementById(InformationElementID.DIRECT_SEQUENCE_PARAMETER_SET);
+        Optional<InformationElement> dsParameterSetElement = genericManagementFrame.getFrameBody().getInformationElementById(InformationElementID.DIRECT_SEQUENCE_PARAMETER_SET);
         if (dsParameterSetElement.isPresent()) {
             byte channel = dsParameterSetElement.get().getBody()[0];
             wirelessNetworkInfo.setChannel(String.valueOf(channel));

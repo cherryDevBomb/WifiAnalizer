@@ -10,8 +10,6 @@ public class ByteUtils {
     public static Stream<String> byteArrayToHexStringStream(byte[] bytes) {
         return Bytes.asList(bytes)
                 .stream()
-                // .map(Byte::toUnsignedInt)
-                // .map(Integer::toHexString)
                 .map(i -> String.format("%02x", i));
     }
 
@@ -21,5 +19,14 @@ public class ByteUtils {
 
     public static String byteArrayToHexString(byte[] bytes, String delimiter) {
         return byteArrayToHexStringStream(bytes).collect(Collectors.joining(delimiter));
+    }
+
+    public static boolean[] intToBinaryArray(int b) {
+        boolean[] binaryArray = new boolean[15];
+        for (int i = 14; i >= 0; i--) {
+            binaryArray[i] = (b % 2 == 1);
+            b /= 2;
+        }
+        return binaryArray;
     }
 }
