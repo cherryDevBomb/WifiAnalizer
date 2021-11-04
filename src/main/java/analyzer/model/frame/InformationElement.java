@@ -1,4 +1,4 @@
-package analyzer.model;
+package analyzer.model.frame;
 
 import java.util.ArrayList;
 import java.util.Arrays;

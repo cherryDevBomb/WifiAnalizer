@@ -1,14 +1,10 @@
-package analyzer.model;
+package analyzer.model.frame;
 
 import lombok.Builder;
 import lombok.Data;
 
 import java.nio.ByteBuffer;
 import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-
-import javax.sound.sampled.Line;
 
 @Data
 @Builder

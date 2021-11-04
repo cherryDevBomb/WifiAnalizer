@@ -2,9 +2,9 @@ package analyzer.parser;
 
 import java.util.Optional;
 
-import analyzer.model.GenericManagementFrame;
-import analyzer.model.InformationElement;
-import analyzer.model.InformationElementID;
+import analyzer.model.frame.GenericManagementFrame;
+import analyzer.model.frame.InformationElement;
+import analyzer.model.frame.InformationElementID;
 import analyzer.model.WirelessNetworkInfo;
 import analyzer.util.ByteUtils;
 
