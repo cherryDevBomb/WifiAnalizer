@@ -51,7 +51,7 @@ public class PacketCaptureService implements Observable {
                 // System.out.println("getRawData() len: " + packet.getRawData().length + " -----" + ByteUtils.byteArrayToHexString(packet.getRawData()));
                 // System.out.println("getHeader().getRawData() len: " + packet.getHeader().getRawData().length + " -----" + ByteUtils.byteArrayToHexString(packet.getHeader().getRawData()));
                 // System.out.println("getPayload().getRawData() len: " + packet.getPayload().getRawData().length + " -----" + ByteUtils.byteArrayToHexString(packet.getPayload().getRawData()));
-                WirelessNetworkInfo wirelessNetworkInfo = FrameParser.parseFrame(packet.getPayload().getRawData());
+                WirelessNetworkInfo wirelessNetworkInfo = FrameParser.parseFrame(packet.getHeader().getRawData(), packet.getPayload().getRawData());
                 if (wirelessNetworkInfo.getMAC() != null) {
                     networks.put(wirelessNetworkInfo.getMAC(), wirelessNetworkInfo);
                 }

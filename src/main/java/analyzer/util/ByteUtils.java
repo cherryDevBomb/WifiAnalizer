@@ -1,9 +1,10 @@
 package analyzer.util;
 
+import com.google.common.primitives.Bytes;
+
+import java.util.Arrays;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
-import com.google.common.primitives.Bytes;
 
 public class ByteUtils {
 
@@ -28,5 +29,23 @@ public class ByteUtils {
             b /= 2;
         }
         return binaryArray;
+    }
+
+    public static boolean[] byteArrayToBooleanArray(byte[] bytes) {
+        int lengthInBits = bytes.length * 8;
+        boolean[] booleanArray = new boolean[lengthInBits];
+        for (int i = 0; i < bytes.length; i++) {
+            for (int j = 0; j < 8; j++) {
+                booleanArray[i * 8 + j] = (bytes[i] & (1 << j)) != 0;
+            }
+        }
+        return booleanArray;
+    }
+
+    // TODO remove after testing
+    public static void main(String[] args) {
+        byte[] arr = {0x70, 0x51}; //0111 0000 0101 0001
+        boolean[] res = byteArrayToBooleanArray(arr);
+        System.out.println(Arrays.toString(res));
     }
 }

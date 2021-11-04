@@ -1,6 +1,5 @@
-<?import javafx.scene.control.cell.PropertyValueFactory?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.cell.*?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Text?>
 <GridPane fx:controller="analyzer.controller.Controller"
@@ -20,9 +19,19 @@
                     <PropertyValueFactory property="MAC"/>
                 </cellValueFactory>
             </TableColumn>
+            <TableColumn text="Signal power" prefWidth="100">
+                <cellValueFactory>
+                    <PropertyValueFactory property="signalPower"/>
+                </cellValueFactory>
+            </TableColumn>
             <TableColumn text="Channel" prefWidth="80">
                 <cellValueFactory>
                     <PropertyValueFactory property="channel"/>
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn text="Frequency" prefWidth="80">
+                <cellValueFactory>
+                    <PropertyValueFactory property="frequency"/>
                 </cellValueFactory>
             </TableColumn>
         </columns>
