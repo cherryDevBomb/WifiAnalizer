@@ -22,6 +22,10 @@ public class Radiotap {
         // if byte 31 is set in "present" bitmask, other present fields follow
         int offset = 8;
         boolean[] lastPresentBitmask = radiotapHeader.getPresent();
+
+        System.out.println("boolean array: "  + Arrays.toString(lastPresentBitmask));
+        System.out.println("bytes: " + Arrays.toString(Arrays.copyOfRange(bytes, 4, 36)));
+
         while (lastPresentBitmask[30]) {
             lastPresentBitmask = ByteUtils.byteArrayToBooleanArray(Arrays.copyOfRange(bytes, offset, offset + 4));
             offset += 4;
