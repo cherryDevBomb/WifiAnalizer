@@ -27,10 +27,13 @@ public class Radiotap {
         System.out.println("bytes: " + Arrays.toString(Arrays.copyOfRange(bytes, 4, 8)));
         System.out.println("bytes: " + ByteUtils.byteArrayToHexString(Arrays.copyOfRange(bytes, 4, 8)));
 
-        while (lastPresentBitmask[30]) {
+        while (lastPresentBitmask[31]) {
             lastPresentBitmask = ByteUtils.byteArrayToBooleanArray(Arrays.copyOfRange(bytes, offset, offset + 4));
+            System.out.println("bytes: " + ByteUtils.byteArrayToHexString(Arrays.copyOfRange(bytes, offset, offset + 4)));
             offset += 4;
         }
+
+        System.out.println("offset" + offset);
 
         // data follows after the last "present" bitmask
         boolean[] presentBitmask = radiotapHeader.getPresent();
@@ -55,6 +58,7 @@ public class Radiotap {
                     default:
                         break;
                 }
+                offset += definedFields[i].getLengthInBytes();
             }
         }
 
