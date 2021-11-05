@@ -30,7 +30,7 @@ public class PacketParser {
         wirelessNetworkInfo.setMAC(macAddress);
 
         // get vendor from OUI (first 3 bytes of MAC)
-        String oui = macAddress.replace(":", "").toUpperCase();
+        String oui = macAddress.replace(":", "").substring(0,6).toUpperCase();
         String vendor = OUIUtil.getVendorByOUI(oui);
         wirelessNetworkInfo.setVendor(vendor);
 
