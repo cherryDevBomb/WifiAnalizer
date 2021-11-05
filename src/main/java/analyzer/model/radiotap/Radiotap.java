@@ -1,10 +1,10 @@
 package analyzer.model.radiotap;
 
+import java.util.Arrays;
+
 import analyzer.util.ByteUtils;
 import lombok.Builder;
 import lombok.Data;
-
-import java.util.Arrays;
 
 @Data
 @Builder
@@ -23,7 +23,7 @@ public class Radiotap {
         int offset = 8;
         boolean[] lastPresentBitmask = radiotapHeader.getPresent();
 
-        System.out.println("boolean array: "  + Arrays.toString(lastPresentBitmask));
+        System.out.println("boolean array: " + Arrays.toString(lastPresentBitmask));
         System.out.println("bytes: " + Arrays.toString(Arrays.copyOfRange(bytes, 4, 8)));
         System.out.println("bytes: " + ByteUtils.byteArrayToHexString(Arrays.copyOfRange(bytes, 4, 8)));
 
