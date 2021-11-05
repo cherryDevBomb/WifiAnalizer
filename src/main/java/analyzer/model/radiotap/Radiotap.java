@@ -24,7 +24,8 @@ public class Radiotap {
         boolean[] lastPresentBitmask = radiotapHeader.getPresent();
 
         System.out.println("boolean array: "  + Arrays.toString(lastPresentBitmask));
-        System.out.println("bytes: " + Arrays.toString(Arrays.copyOfRange(bytes, 4, 36)));
+        System.out.println("bytes: " + Arrays.toString(Arrays.copyOfRange(bytes, 4, 8)));
+        System.out.println("bytes: " + ByteUtils.byteArrayToHexString(Arrays.copyOfRange(bytes, 4, 8)));
 
         while (lastPresentBitmask[30]) {
             lastPresentBitmask = ByteUtils.byteArrayToBooleanArray(Arrays.copyOfRange(bytes, offset, offset + 4));

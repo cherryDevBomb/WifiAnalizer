@@ -21,7 +21,7 @@ public class RadiotapHeader {
                 .version(bytes[0])
                 .padding(bytes[1])
                 .length(ByteBuffer.wrap(Arrays.copyOfRange(bytes, 2, 4)).getShort())
-                .present(ByteUtils.byteArrayToBooleanArray(Arrays.copyOfRange(bytes, 4, 36)))
+                .present(ByteUtils.byteArrayToBooleanArray(Arrays.copyOfRange(bytes, 4, 8)))
                 .build();
     }
 }

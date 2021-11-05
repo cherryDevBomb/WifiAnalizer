@@ -9,7 +9,7 @@
 
     <TableView fx:id="tableView" GridPane.columnIndex="0" GridPane.rowIndex="1">
         <columns>
-            <TableColumn text="SSID" prefWidth="120">
+            <TableColumn text="SSID" prefWidth="200">
                 <cellValueFactory>
                     <PropertyValueFactory property="SSID"/>
                 </cellValueFactory>
@@ -19,7 +19,7 @@
                     <PropertyValueFactory property="MAC"/>
                 </cellValueFactory>
             </TableColumn>
-            <TableColumn text="Signal power" prefWidth="100">
+            <TableColumn text="Signal power" prefWidth="120">
                 <cellValueFactory>
                     <PropertyValueFactory property="signalPower"/>
                 </cellValueFactory>
@@ -29,7 +29,7 @@
                     <PropertyValueFactory property="channel"/>
                 </cellValueFactory>
             </TableColumn>
-            <TableColumn text="Frequency" prefWidth="80">
+            <TableColumn text="Frequency" prefWidth="110">
                 <cellValueFactory>
                     <PropertyValueFactory property="frequency"/>
                 </cellValueFactory>
