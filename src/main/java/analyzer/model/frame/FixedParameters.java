@@ -19,7 +19,6 @@ public class FixedParameters {
         return FixedParameters.builder()
                 .timestamp(ByteBuffer.wrap(Arrays.copyOfRange(bytes, 0, 8)).getLong())
                 .beaconInterval(ByteBuffer.wrap(Arrays.copyOfRange(bytes, 8, 10)).getShort())
-//                .capabilityInfo(ByteUtils.intToBinaryArray(ByteBuffer.wrap(Arrays.copyOfRange(bytes, 10, 12)).getShort()))
                 .capabilityInfo(ByteUtils.byteArrayToBooleanArray(Arrays.copyOfRange(bytes, 10, 12)))
                 .build();
     }

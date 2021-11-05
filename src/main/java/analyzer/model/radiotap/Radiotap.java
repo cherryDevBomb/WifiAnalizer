@@ -37,7 +37,7 @@ public class Radiotap {
                 offset += (definedFields[i].getAlignment() - (offset % definedFields[i].getAlignment()));
             }
 
-            byte[] fieldBytes = Arrays.copyOfRange(bytes, offset, definedFields[i].getLengthInBytes());
+            byte[] fieldBytes = Arrays.copyOfRange(bytes, offset, offset + definedFields[i].getLengthInBytes());
 
             if (presentBitmask[i]) {
                 switch (definedFields[i]) {
