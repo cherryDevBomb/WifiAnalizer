@@ -2,12 +2,13 @@ package analyzer.parser;
 
 import java.util.Optional;
 
+import analyzer.model.WirelessNetworkInfo;
 import analyzer.model.frame.GenericManagementFrame;
 import analyzer.model.frame.InformationElement;
 import analyzer.model.frame.InformationElementID;
-import analyzer.model.WirelessNetworkInfo;
 import analyzer.model.radiotap.Radiotap;
 import analyzer.util.ByteUtils;
+import analyzer.util.OUIUtil;
 
 public class FrameParser {
 
@@ -27,6 +28,11 @@ public class FrameParser {
         // set MAC address to BSSID
         String macAddress = ByteUtils.byteArrayToHexString(genericManagementFrame.getBssid(), ":");
         wirelessNetworkInfo.setMAC(macAddress);
+
+        // get vendor from OUI (first 3 bytes of MAC)
+        String oui = macAddress.replace(":", "").toUpperCase();
+        String vendor = OUIUtil.getVendorByOUI(oui);
+        wirelessNetworkInfo.setVendor(vendor);
 
         // extract signal power from radiotap
         String signalPower = radiotap.getAntennaSignal().getDBmSignalPower() + "dBm";

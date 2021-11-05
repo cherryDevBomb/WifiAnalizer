@@ -19,6 +19,11 @@
                     <PropertyValueFactory property="MAC"/>
                 </cellValueFactory>
             </TableColumn>
+            <TableColumn text="Vendor" prefWidth="200">
+                <cellValueFactory>
+                    <PropertyValueFactory property="vendor"/>
+                </cellValueFactory>
+            </TableColumn>
             <TableColumn text="Signal power" prefWidth="120">
                 <cellValueFactory>
                     <PropertyValueFactory property="signalPower"/>

@@ -2,9 +2,9 @@
 - [x] SSID
 - [x] MAC address
 - [ ] Vendor
-- [ ] Signal power
+- [x] Signal power
 - [x] Channel
-- [ ] Frequency
+- [x] Frequency
 - [ ] Security/cryptography details
 
 ## PacketSniffer

@@ -6,6 +6,7 @@ public class WirelessNetworkInfo {
 
     private final SimpleStringProperty SSID = new SimpleStringProperty("");
     private final SimpleStringProperty MAC = new SimpleStringProperty("");
+    private final SimpleStringProperty vendor = new SimpleStringProperty("");
     private final SimpleStringProperty signalPower = new SimpleStringProperty("");
     private final SimpleStringProperty channel = new SimpleStringProperty("");
     private final SimpleStringProperty frequency = new SimpleStringProperty("");
@@ -32,6 +33,18 @@ public class WirelessNetworkInfo {
 
     public void setMAC(String MAC) {
         this.MAC.set(MAC);
+    }
+
+    public String getVendor() {
+        return vendor.get();
+    }
+
+    public SimpleStringProperty vendorProperty() {
+        return vendor;
+    }
+
+    public void setVendor(String vendor) {
+        this.vendor.set(vendor);
     }
 
     public String getSignalPower() {
