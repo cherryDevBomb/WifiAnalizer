@@ -10,7 +10,7 @@ import analyzer.model.radiotap.Radiotap;
 import analyzer.util.ByteUtils;
 import analyzer.util.OUIUtil;
 
-public class FrameParser {
+public class PacketParser {
 
     public static WirelessNetworkInfo parseFrame(byte[] header, byte[] frame) {
         WirelessNetworkInfo wirelessNetworkInfo = new WirelessNetworkInfo();
@@ -25,7 +25,7 @@ public class FrameParser {
             wirelessNetworkInfo.setSSID(ssid);
         }
 
-        // set MAC address to BSSID
+        // MAC = BSSID
         String macAddress = ByteUtils.byteArrayToHexString(genericManagementFrame.getBssid(), ":");
         wirelessNetworkInfo.setMAC(macAddress);
 
@@ -48,10 +48,6 @@ public class FrameParser {
         // extract frequency from radiotap
         String frequency = radiotap.getChannel().getFrequency() + "MHz";
         wirelessNetworkInfo.setFrequency(frequency);
-
-        // TODO is check needed?
-//        if (ManagementFrameSubtype.BEACON.equals(genericManagementFrame.getFrameControl())) {
-//        }
 
         return wirelessNetworkInfo;
     }

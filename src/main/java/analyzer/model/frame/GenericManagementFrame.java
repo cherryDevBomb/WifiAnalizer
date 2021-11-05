@@ -1,10 +1,10 @@
 package analyzer.model.frame;
 
-import lombok.Builder;
-import lombok.Data;
-
 import java.nio.ByteBuffer;
 import java.util.Arrays;
+
+import lombok.Builder;
+import lombok.Data;
 
 @Data
 @Builder

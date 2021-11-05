@@ -1,11 +1,11 @@
 package analyzer.model.radiotap;
 
+import java.nio.ByteBuffer;
+import java.util.Arrays;
+
 import analyzer.util.ByteUtils;
 import lombok.Builder;
 import lombok.Data;
-
-import java.nio.ByteBuffer;
-import java.util.Arrays;
 
 @Data
 @Builder

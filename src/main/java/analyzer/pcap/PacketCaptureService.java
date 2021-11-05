@@ -1,19 +1,24 @@
 package analyzer.pcap;
 
-import analyzer.model.WirelessNetworkInfo;
-import analyzer.util.Observable;
-import analyzer.util.Observer;
-import analyzer.parser.FrameParser;
-import lombok.Getter;
-import lombok.extern.slf4j.Slf4j;
-
-import org.pcap4j.core.*;
-import org.pcap4j.packet.Packet;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.pcap4j.core.BpfProgram;
+import org.pcap4j.core.NotOpenException;
+import org.pcap4j.core.PcapHandle;
+import org.pcap4j.core.PcapNativeException;
+import org.pcap4j.core.PcapNetworkInterface;
+import org.pcap4j.core.Pcaps;
+import org.pcap4j.packet.Packet;
+
+import analyzer.model.WirelessNetworkInfo;
+import analyzer.parser.PacketParser;
+import analyzer.util.Observable;
+import analyzer.util.Observer;
+import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class PacketCaptureService implements Observable {
@@ -48,10 +53,7 @@ public class PacketCaptureService implements Observable {
         PcapHandle handle = initHandle();
         try {
             handle.loop(0, (Packet packet) -> {
-                // System.out.println("getRawData() len: " + packet.getRawData().length + " -----" + ByteUtils.byteArrayToHexString(packet.getRawData()));
-                // System.out.println("getHeader().getRawData() len: " + packet.getHeader().getRawData().length + " -----" + ByteUtils.byteArrayToHexString(packet.getHeader().getRawData()));
-                // System.out.println("getPayload().getRawData() len: " + packet.getPayload().getRawData().length + " -----" + ByteUtils.byteArrayToHexString(packet.getPayload().getRawData()));
-                WirelessNetworkInfo wirelessNetworkInfo = FrameParser.parseFrame(packet.getHeader().getRawData(), packet.getPayload().getRawData());
+                WirelessNetworkInfo wirelessNetworkInfo = PacketParser.parseFrame(packet.getHeader().getRawData(), packet.getPayload().getRawData());
                 if (wirelessNetworkInfo.getMAC() != null) {
                     networks.put(wirelessNetworkInfo.getMAC(), wirelessNetworkInfo);
                 }
@@ -60,17 +62,5 @@ public class PacketCaptureService implements Observable {
         } catch (PcapNativeException | InterruptedException | NotOpenException e) {
             log.error("Error on capture()", e);
         }
-
-        //for testing UI on windows
-//        int i = 0;
-//        while (i++ < 10) {
-//            networks.put(Integer.toString(i), new WirelessNetworkInfo());
-//            observers.forEach(Observer::updateView);
-//            try {
-//                Thread.sleep(1000);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//        }
     }
 }

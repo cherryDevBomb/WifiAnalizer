@@ -12,11 +12,13 @@ import javafx.scene.control.TableView;
 
 public class Controller implements Observer {
 
-    @FXML private TableView<WirelessNetworkInfo> tableView;
+    @FXML
+    private TableView<WirelessNetworkInfo> tableView;
 
     private final PacketCaptureService pCapService = new PacketCaptureService();
 
-    @FXML private void initialize() {
+    @FXML
+    private void initialize() {
         pCapService.registerObserver(this);
         Platform.runLater(() -> tableView.setItems(FXCollections.observableArrayList(pCapService.getNetworks().values())));
         Executors.newSingleThreadExecutor().execute(pCapService::capture);
