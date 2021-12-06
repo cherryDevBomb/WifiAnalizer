@@ -1,7 +1,7 @@
 ## WifiAnalyzer
 - [x] SSID
 - [x] MAC address
-- [ ] Vendor
+- [x] Vendor
 - [x] Signal power
 - [x] Channel
 - [x] Frequency

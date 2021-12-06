@@ -12,7 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class OUIUtil {
 
-    private static final String OUI_JSON_FILE_PATH = "analyzer/oui.json";
+    private static final String OUI_JSON_FILE_PATH = "oui.json";
 
     private static Map<String, String> ouiMap;
 

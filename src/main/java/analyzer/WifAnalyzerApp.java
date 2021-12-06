@@ -10,7 +10,7 @@ public class WifAnalyzerApp extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/analyzer/wifiAnalyzer.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/wifiAnalyzer.fxml"));
         primaryStage.setTitle("WifiAnalyzer");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
