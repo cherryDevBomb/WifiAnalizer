@@ -5,8 +5,6 @@
 <GridPane fx:controller="analyzer.controller.Controller"
           xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
 
-    <Text text="Welcome" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
-
     <TableView fx:id="tableView" GridPane.columnIndex="0" GridPane.rowIndex="1">
         <columns>
             <TableColumn text="SSID" prefWidth="200">
