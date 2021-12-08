@@ -36,12 +36,15 @@ public class PacketCaptureService implements Observable {
     private final Map<String, WirelessNetworkInfo> networks = new HashMap<>();
 
     private PcapHandle initHandle() {
+        setNpcapSystemProperty();
         PcapHandle handle = null;
         try {
             PcapNetworkInterface networkInterface = Pcaps.getDevByName(WLAN0MON);
-            handle = networkInterface.openLive(SNAP_LEN, PcapNetworkInterface.PromiscuousMode.PROMISCUOUS, TIMEOUT);
-            BpfProgram bpfProgram = handle.compileFilter(BFP_EXPRESSION, BpfProgram.BpfCompileMode.NONOPTIMIZE, PcapHandle.PCAP_NETMASK_UNKNOWN);
-            handle.setFilter(bpfProgram);
+            if (networkInterface != null) {
+                handle = networkInterface.openLive(SNAP_LEN, PcapNetworkInterface.PromiscuousMode.PROMISCUOUS, TIMEOUT);
+                BpfProgram bpfProgram = handle.compileFilter(BFP_EXPRESSION, BpfProgram.BpfCompileMode.NONOPTIMIZE, PcapHandle.PCAP_NETMASK_UNKNOWN);
+                handle.setFilter(bpfProgram);
+            }
         } catch (PcapNativeException | NotOpenException e) {
             log.error("Error on initHandle()", e);
         }
@@ -51,6 +54,11 @@ public class PacketCaptureService implements Observable {
 
     public void capture() {
         PcapHandle handle = initHandle();
+
+        if (handle == null) {
+            return;
+        }
+
         try {
             handle.loop(0, (Packet packet) -> {
                 WirelessNetworkInfo wirelessNetworkInfo = PacketParser.parseFrame(packet.getHeader().getRawData(), packet.getPayload().getRawData());
@@ -62,5 +70,15 @@ public class PacketCaptureService implements Observable {
         } catch (PcapNativeException | InterruptedException | NotOpenException e) {
             log.error("Error on capture()", e);
         }
+    }
+
+    private void setNpcapSystemProperty() {
+        String prop = System.getProperty("jna.library.path");
+        if (prop == null || prop.isEmpty()) {
+            prop = "C:/Windows/System32/Npcap";
+        } else {
+            prop += ";C:/Windows/System32/Npcap";
+        }
+        System.setProperty("jna.library.path", prop);
     }
 }
