@@ -1,12 +1,16 @@
 <?import javafx.scene.control.cell.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.layout.GridPane?>
 <GridPane fx:controller="analyzer.controller.Controller"
           xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
 
     <TableView fx:id="tableView" GridPane.columnIndex="0" GridPane.rowIndex="1">
         <columns>
+            <TableColumn prefWidth="35">
+                <cellValueFactory>
+                    <PropertyValueFactory property="icon"/>
+                </cellValueFactory>
+            </TableColumn>
             <TableColumn text="SSID" prefWidth="200">
                 <cellValueFactory>
                     <PropertyValueFactory property="SSID"/>

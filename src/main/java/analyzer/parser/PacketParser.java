@@ -8,7 +8,9 @@ import analyzer.model.frame.InformationElement;
 import analyzer.model.frame.InformationElementID;
 import analyzer.model.radiotap.Radiotap;
 import analyzer.util.ByteUtils;
+import analyzer.util.IconUtils;
 import analyzer.util.OUIUtil;
+import javafx.scene.image.Image;
 
 public class PacketParser {
 
@@ -37,6 +39,10 @@ public class PacketParser {
         // extract signal power from radiotap
         String signalPower = radiotap.getAntennaSignal().getDBmSignalPower() + "dBm";
         wirelessNetworkInfo.setSignalPower(signalPower);
+
+        // set icon based on signal power
+        Image icon = IconUtils.getIconBySignalPower(radiotap.getAntennaSignal().getDBmSignalPower());
+        wirelessNetworkInfo.setIcon(icon);
 
         // extract Channel from information element
         Optional<InformationElement> dsParameterSetElement = genericManagementFrame.getFrameBody().getInformationElementById(InformationElementID.DIRECT_SEQUENCE_PARAMETER_SET);

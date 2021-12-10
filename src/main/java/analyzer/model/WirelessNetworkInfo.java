@@ -1,6 +1,9 @@
 package analyzer.model;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.scene.image.Image;
 
 public class WirelessNetworkInfo {
 
@@ -10,6 +13,7 @@ public class WirelessNetworkInfo {
     private final SimpleStringProperty signalPower = new SimpleStringProperty("");
     private final SimpleStringProperty channel = new SimpleStringProperty("");
     private final SimpleStringProperty frequency = new SimpleStringProperty("");
+    private final ObjectProperty<Image> icon = new SimpleObjectProperty<>(this, "");
 
     public String getSSID() {
         return SSID.get();
@@ -81,5 +85,17 @@ public class WirelessNetworkInfo {
 
     public void setFrequency(String frequency) {
         this.frequency.set(frequency);
+    }
+
+    public Image getIcon() {
+        return icon.get();
+    }
+
+    public ObjectProperty<Image> iconProperty() {
+        return icon;
+    }
+
+    public void setIcon(Image icon) {
+        this.icon.set(icon);
     }
 }
