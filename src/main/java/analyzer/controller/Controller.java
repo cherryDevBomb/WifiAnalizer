@@ -48,7 +48,9 @@ public class Controller implements Observer {
             //Set up the Table
             TableCell<WirelessNetworkInfo, Image> cell = new TableCell<WirelessNetworkInfo, Image>() {
                 public void updateItem(Image item, boolean empty) {
-                    if (item != null) {
+                    if (empty || item == null) {
+                        imageview.setImage(null);
+                    } else {
                         imageview.setImage(item);
                     }
                 }

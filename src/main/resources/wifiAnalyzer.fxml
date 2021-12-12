@@ -6,10 +6,7 @@
 
     <TableView fx:id="tableView" GridPane.columnIndex="0" GridPane.rowIndex="1">
         <columns>
-            <TableColumn fx:id="iconColumn" prefWidth="35">
-<!--                <cellValueFactory>-->
-<!--                    <PropertyValueFactory property="icon"/>-->
-<!--                </cellValueFactory>-->
+            <TableColumn fx:id="iconColumn" prefWidth="60">
             </TableColumn>
             <TableColumn text="SSID" prefWidth="200">
                 <cellValueFactory>
