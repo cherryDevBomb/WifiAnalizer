@@ -42,8 +42,8 @@ public class Controller implements Observer {
         iconColumn.setCellFactory(param -> {
             //Set up the ImageView
             final ImageView imageview = new ImageView();
-            imageview.setFitHeight(35);
-            imageview.setFitWidth(35);
+            imageview.setFitHeight(50);
+            imageview.setFitWidth(50);
 
             //Set up the Table
             TableCell<WirelessNetworkInfo, Image> cell = new TableCell<WirelessNetworkInfo, Image>() {
