@@ -1,8 +1,8 @@
 ## WifiAnalyzer
-- [x] SSID
-- [x] MAC address
-- [x] Vendor
-- [x] Signal power
-- [x] Channel
-- [x] Frequency
-- [ ] Security/cryptography details
+📶 Java desktop application for showing the available WiFi networks, providing an overview of the following:
+* SSID
+* MAC address
+* Vendor
+* Signal power
+* Channel
+* Frequency
